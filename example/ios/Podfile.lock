@@ -1,27 +1,15 @@
 PODS:
-  - alarm_kit (0.1.0):
-    - Flutter
   - Flutter (1.0.0)
-  - integration_test (0.0.1):
-    - Flutter
 
 DEPENDENCIES:
-  - alarm_kit (from `.symlinks/plugins/alarm_kit/ios`)
   - Flutter (from `Flutter`)
-  - integration_test (from `.symlinks/plugins/integration_test/ios`)
 
 EXTERNAL SOURCES:
-  alarm_kit:
-    :path: ".symlinks/plugins/alarm_kit/ios"
   Flutter:
     :path: Flutter
-  integration_test:
-    :path: ".symlinks/plugins/integration_test/ios"
 
 SPEC CHECKSUMS:
-  alarm_kit: e60be6498241181cb63559f9b4572fb3d7d9196f
   Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
-  integration_test: 4a889634ef21a45d28d50d622cf412dc6d9f586e
 
 PODFILE CHECKSUM: 3ba3a73b1b12adcf321a227a745625fe0888cc82
 

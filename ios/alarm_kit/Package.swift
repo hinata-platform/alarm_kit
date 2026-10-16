@@ -1,4 +1,5 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
+// Tools 6.0 builds the target in the Swift 6 language mode.
 
 import PackageDescription
 
@@ -21,9 +22,6 @@ let package = Package(
       ],
       resources: [
         .process("PrivacyInfo.xcprivacy")
-      ],
-      swiftSettings: [
-        .swiftLanguageMode(.v6)
       ]
     )
   ]

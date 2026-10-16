@@ -1,6 +1,6 @@
 name: alarm_kit
 description: "AlarmKit for Flutter: alarms and timers on iOS and iPadOS 26 that ring through silent mode and Focus, with the system's countdown Live Activity."
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/hinata-platform/alarm_kit
 repository: https://github.com/hinata-platform/alarm_kit
 issue_tracker: https://github.com/hinata-platform/alarm_kit/issues

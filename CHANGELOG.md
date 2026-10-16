@@ -1,3 +1,8 @@
+## 0.1.1
+
+- Swift Package Manager: the package resolves (tools version 6.0, which
+  builds in the Swift 6 language mode by itself).
+
 ## 0.1.0
 
 - Timers and alarms through AlarmKit on iOS and iPadOS 26: `scheduleTimer`,

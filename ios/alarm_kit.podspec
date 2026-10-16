@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'alarm_kit'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'AlarmKit for Flutter: alarms and timers on iOS and iPadOS 26.'
   s.description      = <<-DESC
 Alarms and timers that ring through silent mode and Focus, with the system's
