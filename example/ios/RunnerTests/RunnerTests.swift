@@ -1,27 +1,15 @@
-import Flutter
-import UIKit
 import XCTest
-
 
 @testable import alarm_kit
 
-// This demonstrates a simple unit test of the Swift portion of this plugin's implementation.
-//
-// See https://developer.apple.com/documentation/xctest for more information about using XCTest.
-
+/// The native half the app and its widget extension share: the metadata
+/// ActivityKit matches by name and decodes in the extension.
 class RunnerTests: XCTestCase {
-
-  func testGetPlatformVersion() {
-    let plugin = AlarmKitPlugin()
-
-    let call = FlutterMethodCall(methodName: "getPlatformVersion", arguments: [])
-
-    let resultExpectation = expectation(description: "result block must be called.")
-    plugin.handle(call) { result in
-      XCTAssertEqual(result as! String, "iOS " + UIDevice.current.systemVersion)
-      resultExpectation.fulfill()
-    }
-    waitForExpectations(timeout: 1)
+  func testMetadataSurvivesTheTripToTheExtension() throws {
+    guard #available(iOS 26.0, *) else { throw XCTSkip("AlarmKit needs iOS 26") }
+    let sent = AlarmKitMetadata(kind: "work")
+    let data = try JSONEncoder().encode(sent)
+    let received = try JSONDecoder().decode(AlarmKitMetadata.self, from: data)
+    XCTAssertEqual(received.kind, "work")
   }
-
 }

@@ -36,8 +36,14 @@ jobs:
         with:
           channel: stable
           flutter-version: ${{ env.FLUTTER_VERSION }}
-      - name: Hand the OIDC token to pub
+      - run: flutter pub get
+      # The OIDC token lives in this one step only, never in $GITHUB_ENV, so no
+      # other step of the job can read it.
+      - name: Publish if the pubspec carries the tag's version
         run: |
+          set -e
+          have="$(grep -m1 '^version:' pubspec.yaml | awk '{print $2}')"
+          [ "$have" = "${GITHUB_REF_NAME#v}" ] || { echo "::error::pubspec says $have"; exit 1; }
           PUB_TOKEN="$(curl --retry 5 --retry-connrefused -sSLf \
             "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=https://pub.dev" \
             -H "User-Agent: actions/oidc-client" \
@@ -45,12 +51,6 @@ jobs:
             | jq -r '.value')"
           [ -n "$PUB_TOKEN" ] && [ "$PUB_TOKEN" != "null" ] || { echo "::error::no token"; exit 1; }
           echo "::add-mask::$PUB_TOKEN"
-          echo "PUB_TOKEN=$PUB_TOKEN" >> "$GITHUB_ENV"
+          export PUB_TOKEN
           dart pub token add https://pub.dev --env-var PUB_TOKEN
-      - run: flutter pub get
-      - name: Publish if the pubspec carries the tag's version
-        run: |
-          set -e
-          have="$(grep -m1 '^version:' pubspec.yaml | awk '{print $2}')"
-          [ "$have" = "${GITHUB_REF_NAME#v}" ] || { echo "::error::pubspec says $have"; exit 1; }
           flutter pub publish --force
